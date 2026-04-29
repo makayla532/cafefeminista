@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Café Feminista — Joe Coffee</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Joe Coffee exact brand blues from swatch */
+  --plum:       #0a4a5e;
+  --rose:       #1a9fd4;
+  --gold:       #48c0f0;
+  --cream:      #ffffff;
+  --sand:       #e4f4fa;
+  --mist:       #f5fbfe;
+  --olive:      #0a4a5e;
+  --terracotta: #1a9fd4;
+  --ink:        #0a2a38;
+
+  /* Outfit = closest Google Fonts match to Centra No. 2 (geometric sans)
+     Georgia  = Joe's actual brand serif (native) */
+  --display: 'Outfit', Georgia, sans-serif;
+  --serif:   Georgia, 'Times New Roman', serif;
+  --sans:    'Outfit', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--sans); background: var(--cream); color: var(--ink); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 3rem;
+  height: 64px;
+  background: var(--plum); /* #0a4a5e dark teal */
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.nav-logo {
+  font-family: var(--display); font-size: 13px; font-weight: 700;
+  color: var(--cream); letter-spacing: 1px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-logo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.65); text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: #ffffff; }
+.nav-cta {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--plum); background: var(--rose); border: none; padding: 8px 20px;
+  border-radius: 2px; cursor: pointer; font-family: var(--sans); transition: background 0.2s;
+}
+.nav-cta:hover { background: #1a3fa3; }
+
+/* ─── PAGE SYSTEM ─── */
+.page { display: none; padding-top: 64px; }
+.page.active { display: block; }
+
+/* ═══════════════════════════════════════
+   LANDING PAGE
+═══════════════════════════════════════ */
+
+/* HERO */
+.hero {
+  min-height: 94vh;
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 3px solid var(--rose);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(26,159,212,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(10,74,94,0.04) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Textile pattern overlay */
+.hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    0deg, transparent, transparent 28px, rgba(255,255,255,0.015) 28px, rgba(255,255,255,0.015) 29px
+  ), repeating-linear-gradient(
+    90deg, transparent, transparent 28px, rgba(255,255,255,0.015) 28px, rgba(255,255,255,0.015) 29px
+  );
+  pointer-events: none;
+}
+
+.hero-left {
+  padding: 6rem 4rem 5rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 2;
+}
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 2rem;
+}
+.hero-eyebrow::before {
+  content: ''; width: 32px; height: 1px; background: var(--rose);
+}
+.hero-title {
+  font-family: var(--display);
+  font-size: clamp(52px, 7vw, 88px);
+  font-weight: 900; font-style: italic;
+  line-height: 0.92;
+  color: var(--plum);
+  margin-bottom: 2rem;
+}
+.hero-title .accent { color: inherit; }
+.hero-title .light-word {
+  font-weight: 700; font-style: normal;
+  font-size: 0.5em; display: block;
+  color: rgba(10,74,94,0.45); letter-spacing: 3px;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+.hero-manifesto {
+  font-family: var(--serif); font-style: italic;
+  font-size: 16px; line-height: 1.7;
+  color: rgba(10,42,56,0.72);
+  max-width: 420px; margin-bottom: 2.5rem;
+  border-left: 2px solid var(--rose);
+  padding-left: 1.25rem;
+}
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-bottom: 3rem;
+}
+.hero-stat-num {
+  font-family: var(--display); font-size: 32px; font-weight: 700;
+  color: var(--rose); line-height: 1;
+}
+.hero-stat-label {
+  font-size: 11px; font-weight: 400; color: rgba(10,74,94,0.55);
+  margin-top: 3px; line-height: 1.4; max-width: 100px;
+}
+.hero-btns { display: flex; gap: 14px; align-items: center; }
+.btn-primary {
+  font-family: var(--sans); font-size: 12px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  background: var(--rose); color: white;
+  border: none; padding: 14px 28px; border-radius: 2px;
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-primary:hover { background: #1a3fa3; }
+.btn-ghost {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(245,240,232,0.6); background: none; border: none;
+  cursor: pointer; display: flex; align-items: center; gap: 8px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--cream); }
+.btn-ghost::after { content: '↓'; font-style: normal; }
+
+.hero-right {
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 2; padding: 4rem 3rem;
+}
+.hero-bag {
+  width: 280px; height: 380px;
+  background: linear-gradient(145deg, #1a9fd4 0%, #0a4a5e 50%, #062a3a 100%);
+  border-radius: 12px 12px 40px 40px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+}
+.hero-bag::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg,
+    rgba(255,255,255,0.12) 0%, transparent 40%,
+    rgba(26,159,212,0.3) 70%, rgba(10,74,94,0.2) 100%
+  );
+}
+.bag-stripe {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 120px;
+  background: linear-gradient(to top, rgba(26,159,212,0.5), transparent);
+}
+.bag-text {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  text-align: center; width: 90%;
+}
+.bag-cafe { font-family: var(--sans); font-size: 9px; letter-spacing: 4px; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 4px; }
+.bag-fem { font-family: var(--display); font-size: 52px; font-weight: 900; font-style: italic; color: white; line-height: 0.9; }
+.bag-inista { font-family: var(--display); font-size: 40px; font-weight: 700; font-style: italic; color: rgba(255,255,255,0.85); }
+.bag-tagline { font-family: var(--serif); font-size: 8px; font-style: italic; color: rgba(255,255,255,0.5); margin-top: 10px; line-height: 1.6; }
+.bag-producer-strip {
+  position: absolute; bottom: 18px; left: 16px; right: 16px;
+  background: rgba(0,0,0,0.35); border-radius: 6px; padding: 8px 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.bag-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--rose); opacity: 0.9; flex-shrink: 0; }
+.bag-producer-name { font-size: 10px; color: rgba(255,255,255,0.85); font-weight: 500; }
+.bag-producer-loc { font-size: 9px; color: rgba(255,255,255,0.5); }
+
+.hero-float-tag {
+  position: absolute; top: 30%; right: -10px;
+  background: var(--gold); color: var(--plum);
+  font-size: 10px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px 6px 10px; border-radius: 4px 0 0 4px;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+/* MISSION STRIP */
+.mission-strip {
+  background: var(--rose);
+  padding: 1.25rem 5rem;
+  display: flex; align-items: center; gap: 3rem; overflow: hidden;
+}
+.mission-strip-text {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; color: white; white-space: nowrap;
+  opacity: 0.9;
+}
+.mission-strip-sep { color: rgba(255,255,255,0.4); flex-shrink: 0; }
+
+/* ABOUT SECTION */
+.about {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+}
+.about-left {
+  background: var(--plum); /* keep dark teal for contrast section */
+  padding: 6rem 4rem 6rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.section-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--rose); }
+.about-title {
+  font-family: var(--display); font-size: 44px; font-weight: 700;
+  color: var(--cream); line-height: 1.1; margin-bottom: 1.5rem;
+}
+.about-body {
+  font-size: 15px; line-height: 1.8; color: rgba(228,244,250,0.80);
+  font-family: var(--serif); margin-bottom: 2rem;
+}
+.about-body strong { color: var(--cream); font-weight: normal; }
+.about-pillars {
+  display: flex; flex-direction: column; gap: 12px; margin-top: 1rem;
+}
+.pillar {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+}
+.pillar-icon {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(196,80,106,0.2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 14px;
+}
+.pillar-title { font-size: 12px; font-weight: 600; color: var(--cream); letter-spacing: 0.5px; margin-bottom: 2px; }
+.pillar-desc { font-size: 12px; color: rgba(228,244,250,0.6); line-height: 1.5; }
+
+.about-right {
+  background: #ffffff;
+  padding: 6rem 5rem 6rem 4rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative;
+}
+.about-right::before {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--plum) 30%, var(--plum) 70%, transparent);
+}
+.stat-cluster { display: flex; flex-direction: column; gap: 2rem; }
+.big-stat { }
+.big-stat-num {
+  font-family: var(--display); font-size: 72px; font-weight: 900;
+  color: var(--ink); line-height: 1;
+}
+.big-stat-unit { font-size: 28px; color: var(--rose); }
+.big-stat-label {
+  font-size: 14px; color: #4a6080; line-height: 1.5; margin-top: 6px;
+  max-width: 280px;
+}
+.stat-divider { height: 1px; background: rgba(15,42,82,0.12); }
+.impact-note {
+  background: var(--plum); border-radius: 4px; padding: 20px 24px;
+  margin-top: 1rem;
+}
+.impact-note-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+.impact-note-text { font-family: var(--serif); font-style: italic; font-size: 14px; color: rgba(228,244,250,0.85); line-height: 1.65; }
+
+/* PRODUCERS GRID */
+.producers { padding: 6rem 5rem; background: #ffffff; }
+.producers-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem; }
+.producers-title { font-family: var(--display); font-size: 40px; font-weight: 700; color: var(--ink); }
+.producers-sub { font-size: 13px; color: #5070a0; margin-top: 6px; }
+.producers-link {
+  font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--rose); text-decoration: none; display: flex; align-items: center; gap: 6px;
+}
+.producers-link::after { content: '→'; }
+.producers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.producer-card {
+  background: white; border-radius: 6px; overflow: hidden;
+  border: 1px solid rgba(15,42,82,0.08);
+  cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;
+}
+.producer-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,42,82,0.12); }
+.producer-card-img {
+  height: 220px; position: relative; overflow: hidden;
+}
+.producer-card-img-bg {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+}
+.card-img-blanca {
+  background: linear-gradient(145deg, #2563b8 0%, #1a3a6b 50%, #0a1a38 100%);
+}
+.card-img-upcoming {
+  background: linear-gradient(145deg, #1e6ab8 0%, #0f3a6b 50%, #071a3a 100%);
+}
+.card-img-future {
+  background: linear-gradient(145deg, #3a82c8 0%, #1a4a8a 50%, #0a2050 100%);
+}
+.card-img-label {
+  font-family: var(--display); font-size: 36px; font-weight: 900; font-style: normal;
+  color: rgba(255,255,255,0.2); letter-spacing: -1px;
+}
+.card-country-badge {
+  position: absolute; top: 14px; left: 14px;
+  background: rgba(0,0,0,0.45); color: white;
+  font-size: 10px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+}
+.card-active-badge {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--rose); color: white;
+  font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+}
+.card-soon-badge {
+  position: absolute; top: 14px; right: 14px;
+  background: rgba(74,130,212,0.9); color: white;
+  font-size: 9px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+}
+.producer-card-body { padding: 20px 22px; }
+.producer-name { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+.producer-farm { font-size: 12px; color: #6080a0; margin-bottom: 12px; }
+.producer-quote {
+  font-family: var(--serif); font-style: italic;
+  font-size: 13px; color: #3a5070; line-height: 1.6; margin-bottom: 14px;
+}
+.producer-chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  font-size: 10px; font-weight: 500; padding: 3px 10px; border-radius: 20px;
+  background: var(--sand); color: #3a5070; border: 1px solid rgba(15,42,82,0.1);
+}
+.chip-rose { background: rgba(30,79,163,0.1); color: var(--rose); border-color: rgba(30,79,163,0.2); }
+.producer-card-footer {
+  padding: 12px 22px; border-top: 1px solid rgba(15,42,82,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.card-price { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--plum); }
+.card-shop-btn {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: white; background: var(--rose); border: none; padding: 7px 16px;
+  border-radius: 2px; cursor: pointer; font-family: var(--sans);
+  transition: background 0.2s;
+}
+.card-shop-btn:hover { background: #1a3fa3; }
+.card-shop-btn.disabled {
+  background: var(--sand); color: #6080a0; cursor: default;
+}
+
+/* COMMITMENT SECTION */
+.commitment {
+  background: var(--plum);
+  padding: 6rem 5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+}
+.commitment-title { font-family: var(--display); font-size: 44px; font-weight: 700; color: var(--cream); line-height: 1.1; margin-bottom: 1.5rem; }
+.commitment-body { font-family: var(--serif); font-size: 15px; color: rgba(228,244,250,0.75); line-height: 1.8; }
+.commitment-items { display: flex; flex-direction: column; gap: 16px; }
+.commitment-item { display: flex; gap: 16px; align-items: flex-start; }
+.commitment-num { font-family: var(--display); font-size: 36px; font-weight: 900; color: rgba(74,130,212,0.35); line-height: 1; flex-shrink: 0; width: 40px; }
+.commitment-item-title { font-size: 14px; font-weight: 600; color: var(--cream); margin-bottom: 4px; }
+.commitment-item-body { font-size: 13px; color: rgba(245,240,232,0.55); line-height: 1.6; }
+
+/* ═══════════════════════════════════════
+   COFFEE DETAIL PAGE
+═══════════════════════════════════════ */
+.detail-hero {
+  background: var(--plum);
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  position: relative; overflow: hidden;
+}
+.detail-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 90% at 100% 50%, rgba(74,130,212,0.2) 0%, transparent 55%);
+  pointer-events: none;
+}
+.detail-left {
+  padding: 5rem 3.5rem 5rem 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 2;
+}
+.back-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); background: none; border: none; cursor: pointer;
+  font-family: var(--sans); margin-bottom: 3rem; padding: 0;
+  transition: color 0.2s;
+}
+.back-btn:hover { color: #ffffff; }
+.back-btn::before { content: '←'; }
+.detail-program-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(30,79,163,0.2); border: 1px solid rgba(30,79,163,0.3);
+  padding: 5px 14px 5px 10px; border-radius: 20px; margin-bottom: 1.5rem; width: fit-content;
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--rose); }
+.badge-text { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rose); }
+.detail-name {
+  font-family: var(--display); font-size: clamp(42px, 5vw, 68px);
+  font-weight: 900; color: var(--cream); line-height: 1.0; margin-bottom: 6px;
+}
+.detail-origin {
+  font-size: 14px; color: rgba(245,240,232,0.45); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 2.5rem; font-weight: 300;
+}
+
+/* Tasting profile — visual */
+.tasting-section { margin-bottom: 2.5rem; }
+.tasting-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(228,244,250,0.5); margin-bottom: 14px;
+}
+.tasting-notes { display: flex; gap: 10px; flex-wrap: wrap; }
+.tasting-note {
+  font-family: var(--serif); font-style: italic;
+  font-size: 15px; color: var(--cream);
+  padding: 8px 18px; border-radius: 40px;
+  border: 1px solid rgba(245,240,232,0.18);
+  position: relative; overflow: hidden;
+}
+.note-cream { background: rgba(212,147,58,0.15); border-color: rgba(212,147,58,0.3); }
+.note-almond { background: rgba(196,80,106,0.12); border-color: rgba(196,80,106,0.25); }
+.note-lemon { background: rgba(74,92,58,0.2); border-color: rgba(74,92,58,0.35); }
+
+/* Specs grid */
+.detail-specs {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;
+  margin-bottom: 2.5rem;
+}
+.spec {
+  padding: 12px 14px;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 4px;
+}
+.spec-k { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(228,244,250,0.45); margin-bottom: 3px; }
+.spec-v { font-size: 14px; font-weight: 500; color: var(--cream); }
+
+/* Purchase */
+.purchase { }
+.option-row { margin-bottom: 16px; }
+.option-row-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(228,244,250,0.5); margin-bottom: 8px;
+}
+.option-pills { display: flex; gap: 8px; }
+.opt {
+  font-family: var(--sans); font-size: 13px; font-weight: 500;
+  padding: 8px 20px; border-radius: 2px; cursor: pointer;
+  border: 1px solid rgba(245,240,232,0.15);
+  background: transparent; color: rgba(228,244,250,0.7);
+  transition: all 0.15s;
+}
+.opt.sel {
+  background: var(--rose); color: white; border-color: var(--rose);
+}
+.opt:hover:not(.sel) { border-color: rgba(255,255,255,0.35); color: #ffffff; }
+.price-row {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-bottom: 1.5rem; margin-top: 1rem;
+}
+.detail-price { font-family: var(--display); font-size: 44px; font-weight: 700; color: var(--cream); }
+.detail-price-unit { font-size: 13px; color: rgba(228,244,250,0.5); }
+.add-row { display: flex; gap: 12px; align-items: center; }
+.qty-control {
+  display: flex; align-items: center; gap: 0;
+  border: 1px solid rgba(245,240,232,0.15); border-radius: 2px; overflow: hidden;
+}
+.qty-btn-dark {
+  background: rgba(255,255,255,0.06); border: none; color: var(--cream);
+  font-size: 18px; width: 40px; height: 48px; cursor: pointer; font-family: var(--sans);
+  transition: background 0.15s;
+}
+.qty-btn-dark:hover { background: rgba(255,255,255,0.12); }
+.qty-num-dark {
+  width: 40px; text-align: center; font-size: 15px; font-weight: 500;
+  color: var(--cream); background: none;
+}
+.add-btn-dark {
+  flex: 1; background: var(--rose); color: white; border: none;
+  font-family: var(--sans); font-size: 12px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  height: 48px; border-radius: 2px; cursor: pointer; transition: background 0.2s;
+}
+.add-btn-dark:hover { background: #1a3fa3; }
+
+/* DETAIL RIGHT — producer story */
+.detail-right {
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+.producer-hero-section {
+  flex: 1;
+  padding: 5rem 4rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.producer-portrait {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: linear-gradient(135deg, #2563b8, #1e4fa3);
+  border: 3px solid rgba(244,246,251,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 22px; font-weight: 700; color: white;
+  margin-bottom: 1.5rem;
+}
+.producer-intro-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 6px;
+}
+.producer-intro-name {
+  font-family: var(--display); font-size: 32px; font-weight: 700;
+  color: var(--cream); margin-bottom: 4px;
+}
+.producer-intro-role {
+  font-size: 13px; color: rgba(228,244,250,0.5); margin-bottom: 1.5rem;
+  letter-spacing: 0.5px;
+}
+.producer-story {
+  font-family: var(--serif); font-size: 14px; line-height: 1.8;
+  color: rgba(228,244,250,0.75); margin-bottom: 1.5rem;
+}
+.producer-story strong { color: var(--cream); font-weight: normal; }
+.producer-highlights { display: flex; flex-direction: column; gap: 10px; margin-top: 0.5rem; }
+.highlight {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 4px; border-left: 2px solid var(--rose);
+}
+.highlight-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.highlight-text { font-size: 13px; color: rgba(228,244,250,0.7); line-height: 1.5; }
+.highlight-text strong { color: var(--cream); font-weight: 600; }
+
+/* Detail bottom — transparency section */
+.detail-transparency {
+  background: #f5fbfe;
+  padding: 5rem;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;
+  border-top: 1px solid rgba(45,26,46,0.12);
+}
+.trans-col { }
+.trans-label {
+  font-size: 10px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.trans-label::before { content: ''; width: 20px; height: 1px; background: var(--rose); }
+.trans-title { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.trans-body { font-size: 13px; color: #5a4a3a; line-height: 1.7; }
+.trans-num { font-family: var(--display); font-size: 36px; font-weight: 900; color: var(--ink); margin-bottom: 4px; }
+.trans-num-unit { font-size: 16px; color: var(--rose); }
+
+/* Detail story section */
+.detail-story {
+  background: #ffffff;
+  padding: 5rem;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+}
+.detail-story-title { font-family: var(--display); font-size: 36px; font-weight: 700; color: var(--ink); margin-bottom: 1.25rem; line-height: 1.15; }
+.detail-story-body { font-family: var(--serif); font-size: 15px; color: #2a3a50; line-height: 1.8; margin-bottom: 1.25rem; }
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item { display: flex; gap: 16px; padding-bottom: 20px; position: relative; }
+.timeline-item::before {
+  content: ''; position: absolute; left: 15px; top: 28px; bottom: 0; width: 1px;
+  background: rgba(15,42,82,0.12);
+}
+.timeline-item:last-child::before { display: none; }
+.timeline-dot {
+  width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0;
+  background: var(--plum); display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--cream); z-index: 1;
+}
+.timeline-year { font-size: 11px; font-weight: 600; color: var(--rose); margin-bottom: 2px; }
+.timeline-text { font-size: 13px; color: #3a5070; line-height: 1.55; }
+.timeline-text strong { color: var(--ink); }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--ink); padding: 3rem 5rem;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-brand { font-family: var(--display); font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.5); }
+.footer-note { font-size: 11px; color: rgba(255,255,255,0.25); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page.active .hero-eyebrow { animation: fadeUp 0.5s ease forwards; }
+.page.active .hero-title    { animation: fadeUp 0.6s 0.1s ease forwards; opacity: 0; }
+.page.active .hero-manifesto{ animation: fadeUp 0.6s 0.2s ease forwards; opacity: 0; }
+.page.active .hero-stats    { animation: fadeUp 0.6s 0.3s ease forwards; opacity: 0; }
+.page.active .hero-btns     { animation: fadeUp 0.6s 0.4s ease forwards; opacity: 0; }
+.page.active .hero-bag      { animation: fadeUp 0.7s 0.15s ease forwards; opacity: 0; }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    Joe Coffee
+  </div>
+  <div class="nav-links">
+    <a href="#" onclick="show('landing')" id="nav-landing" class="active">Café Feminista</a>
+    <a href="#" onclick="show('detail')" id="nav-detail">Blanca Suazo</a>
+    <a href="#">Our Coffees</a>
+    <a href="#">Humanity</a>
+  </div>
+  <button class="nav-cta" onclick="show('detail')">Shop Now</button>
+</nav>
+
+<!-- ═══ LANDING PAGE ═══ -->
+<div class="page active" id="page-landing">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Joe Coffee · A Program</div>
+      <h1 class="hero-title">
+        <span class="light-word">Café</span>
+        Femi<span class="accent">ni</span>sta
+      </h1>
+      <p class="hero-manifesto">Not just a coffee. A statement of intent. A platform for women leaders in coffee whose work guides us toward feminist futures — from seed to cup.</p>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">20–30%</div>
+          <div class="hero-stat-label">of coffee farms are women-owned globally</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">70%</div>
+          <div class="hero-stat-label">of coffee labor is performed by women</div>
+        </div>
+      </div>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="show('detail')">Meet the Producers</button>
+        <button class="btn-ghost" onclick="document.getElementById('about-anchor').scrollIntoView({behavior:'smooth'})">Learn more</button>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-bag">
+        <div class="bag-stripe"></div>
+        <div class="bag-text">
+          <div class="bag-cafe">café</div>
+          <div class="bag-fem">fém</div>
+          <div class="bag-inista">inista</div>
+          <div class="bag-tagline">just a coffee · a statement of intent<br>leadership by women</div>
+        </div>
+        <div class="bag-producer-strip">
+          <div class="bag-avatar"></div>
+          <div>
+            <div class="bag-producer-name">Blanca Suazo</div>
+            <div class="bag-producer-loc">Córdoba, Veracruz · México</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-float-tag">Now Available</div>
+    </div>
+  </section>
+
+  <!-- Mission strip -->
+  <div class="mission-strip">
+    <span class="mission-strip-text">Leadership by women</span>
+    <span class="mission-strip-sep">·</span>
+    <span class="mission-strip-text">Equity through coffee</span>
+    <span class="mission-strip-sep">·</span>
+    <span class="mission-strip-text">A movement to join</span>
+    <span class="mission-strip-sep">·</span>
+    <span class="mission-strip-text">Profound positive change</span>
+    <span class="mission-strip-sep">·</span>
+    <span class="mission-strip-text">Collective power</span>
+    <span class="mission-strip-sep">·</span>
+    <span class="mission-strip-text">Liberation and freedom</span>
+    <span class="mission-strip-sep">·</span>
+  </div>
+
+  <!-- About -->
+  <div id="about-anchor"></div>
+  <section class="about">
+    <div class="about-left">
+      <div class="section-eyebrow">Why This Exists</div>
+      <h2 class="about-title">The gap between labor and ownership</h2>
+      <p class="about-body">Women make up <strong>~70% of the coffee workforce</strong> — hand-harvesting, processing, fermenting — yet own just 20–30% of farms and hold far fewer leadership roles in cooperatives and trade.</p>
+      <p class="about-body">Café Feminista is Joe Coffee's response: a sourcing program that <strong>centers women who identify with feminism</strong> as leaders, not just labor — amplifying their work, their voices, and their economic power.</p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">⟳</div>
+          <div>
+            <div class="pillar-title">Direct relationships</div>
+            <div class="pillar-desc">We source directly from women-led farms and cooperatives, connecting producers to international markets on their own terms.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">◎</div>
+          <div>
+            <div class="pillar-title">Naming the invisible</div>
+            <div class="pillar-desc">We can't change what we can't name. Every lot in this program is documented, attributed, and told from the producer's perspective.</div>
+          </div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">↑</div>
+          <div>
+            <div class="pillar-title">Platform amplification</div>
+            <div class="pillar-desc">Our cafes, site, and channels are tools for amplifying producer voices — not just selling coffee.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="stat-cluster">
+        <div class="big-stat">
+          <div class="big-stat-num">70<span class="big-stat-unit">%</span></div>
+          <div class="big-stat-label">of global coffee labor is women's work. Most of it is unpaid or undervalued.</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="big-stat">
+          <div class="big-stat-num">20<span class="big-stat-unit">%</span></div>
+          <div class="big-stat-label">of farms are legally women-owned. In some regions, that falls to 5%.</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="impact-note">
+          <div class="impact-note-label">Our commitment</div>
+          <div class="impact-note-text">"For us, feminism is a pathway to removing barriers. Smallholder producers taking ownership of their work and building independence in tangible ways — that, in itself, is powerful."<br><br>— Blanca Suazo, Musa Café</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Producers grid -->
+  <section class="producers">
+    <div class="producers-header">
+      <div>
+        <div class="producers-title">The Producers</div>
+        <div class="producers-sub">Women leaders who define this program — past, present, and coming soon.</div>
+      </div>
+      <a href="#" class="producers-link" onclick="show('detail'); return false;">Shop all</a>
+    </div>
+    <div class="producers-grid">
+      <div class="producer-card" onclick="show('detail')">
+        <div class="producer-card-img">
+          <div class="producer-card-img-bg card-img-blanca">
+            <div class="card-img-label">BS</div>
+          </div>
+          <div class="card-country-badge">México</div>
+          <div class="card-active-badge">Available now</div>
+        </div>
+        <div class="producer-card-body">
+          <div class="producer-name">Blanca Suazo</div>
+          <div class="producer-farm">Musa Café · Córdoba, Veracruz</div>
+          <div class="producer-quote">"Feminism is a pathway to removing barriers — not performative, but lived and practical."</div>
+          <div class="producer-chips">
+            <span class="chip">Light roast</span>
+            <span class="chip">Washed</span>
+            <span class="chip chip-rose">Cream soda · Almond · Lemon</span>
+          </div>
+        </div>
+        <div class="producer-card-footer">
+          <div class="card-price">From $17.50</div>
+          <button class="card-shop-btn" onclick="show('detail')">Shop</button>
+        </div>
+      </div>
+      <div class="producer-card">
+        <div class="producer-card-img">
+          <div class="producer-card-img-bg card-img-upcoming">
+            <div class="card-img-label">CF</div>
+          </div>
+          <div class="card-country-badge">Colombia</div>
+          <div class="card-soon-badge">Coming soon</div>
+        </div>
+        <div class="producer-card-body">
+          <div class="producer-name">New Origin</div>
+          <div class="producer-farm">Cauca Region · TBA</div>
+          <div class="producer-quote">We are actively sourcing the next Café Feminista lot from a women-led cooperative in Colombia's Cauca region.</div>
+          <div class="producer-chips">
+            <span class="chip">Medium roast</span>
+            <span class="chip">Natural</span>
+          </div>
+        </div>
+        <div class="producer-card-footer">
+          <div class="card-price">Notify me</div>
+          <button class="card-shop-btn disabled">Soon</button>
+        </div>
+      </div>
+      <div class="producer-card">
+        <div class="producer-card-img">
+          <div class="producer-card-img-bg card-img-future">
+            <div class="card-img-label">+</div>
+          </div>
+          <div class="card-soon-badge">Seeking</div>
+        </div>
+        <div class="producer-card-body">
+          <div class="producer-name">Expand the program</div>
+          <div class="producer-farm">Are you a women-led farm?</div>
+          <div class="producer-quote">We are building relationships with women-led farms and cooperatives across Africa, Central America, and Asia-Pacific.</div>
+          <div class="producer-chips">
+            <span class="chip">Learn more</span>
+          </div>
+        </div>
+        <div class="producer-card-footer">
+          <div class="card-price">Partner with us</div>
+          <button class="card-shop-btn">Contact</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Commitment -->
+  <section class="commitment">
+    <div>
+      <div class="section-eyebrow" style="color:var(--rose)">Our Commitments</div>
+      <h2 class="commitment-title">What we're holding ourselves to</h2>
+      <p class="commitment-body">Rhetoric without accountability is marketing. These are the specific, measurable commitments that govern how Café Feminista operates — and what we'll publish annually to prove it.</p>
+    </div>
+    <div class="commitment-items">
+      <div class="commitment-item">
+        <div class="commitment-num">01</div>
+        <div>
+          <div class="commitment-item-title">Transparent pricing</div>
+          <div class="commitment-item-body">We will disclose the floor price and any gender premium paid for every Café Feminista lot — published on the product page.</div>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-num">02</div>
+        <div>
+          <div class="commitment-item-title">Annual impact report</div>
+          <div class="commitment-item-body">Each year we will publish the number of women-led farms sourced from, total dollars directed to women producers, and % of our single-origin menu they represent.</div>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-num">03</div>
+        <div>
+          <div class="commitment-item-title">Producer-led storytelling</div>
+          <div class="commitment-item-body">Every lot is attributed. Every page is written in conversation with the producer, not about them.</div>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <div class="commitment-num">04</div>
+        <div>
+          <div class="commitment-item-title">Third-party verification</div>
+          <div class="commitment-item-body">We are working toward partnership with IWCA or Partnership for Gender Equity for external audit of our sourcing claims.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Joe Coffee · Café Feminista</div>
+    <div class="footer-note">New York City Roasters · Established 2003</div>
+  </footer>
+</div>
+
+<!-- ═══ COFFEE DETAIL PAGE ═══ -->
+<div class="page" id="page-detail">
+
+  <section class="detail-hero">
+    <div class="detail-left">
+      <button class="back-btn" onclick="show('landing')">Back to Café Feminista</button>
+      <div class="detail-program-badge">
+        <div class="badge-dot"></div>
+        <div class="badge-text">Café Feminista</div>
+      </div>
+      <h1 class="detail-name">Blanca<br>Suazo</h1>
+      <div class="detail-origin">México · Córdoba, Veracruz · Washed · MASL 1100</div>
+
+      <div class="tasting-section">
+        <div class="tasting-label">Tasting notes</div>
+        <div class="tasting-notes">
+          <div class="tasting-note note-cream">Cream soda</div>
+          <div class="tasting-note note-almond">Almond</div>
+          <div class="tasting-note note-lemon">Meyer lemon</div>
+        </div>
+      </div>
+
+      <div class="detail-specs">
+        <div class="spec"><div class="spec-k">Origin</div><div class="spec-v">Córdoba, Veracruz</div></div>
+        <div class="spec"><div class="spec-k">Process</div><div class="spec-v">Washed</div></div>
+        <div class="spec"><div class="spec-k">Altitude</div><div class="spec-v">1,100 masl</div></div>
+        <div class="spec"><div class="spec-k">Roast</div><div class="spec-v">Light</div></div>
+        <div class="spec"><div class="spec-k">Variety</div><div class="spec-v">Colombia · CR95 · Garnica</div></div>
+        <div class="spec"><div class="spec-k">Farm</div><div class="spec-v">Musa Café</div></div>
+      </div>
+
+      <div class="purchase">
+        <div class="option-row">
+          <div class="option-row-label">Weight</div>
+          <div class="option-pills">
+            <button class="opt sel" onclick="selectOpt(this)">6 oz</button>
+            <button class="opt" onclick="selectOpt(this)">12 oz</button>
+            <button class="opt" onclick="selectOpt(this)">2 lb</button>
+          </div>
+        </div>
+        <div class="option-row">
+          <div class="option-row-label">Grind</div>
+          <div class="option-pills">
+            <button class="opt sel" onclick="selectOpt(this)">Whole bean</button>
+            <button class="opt" onclick="selectOpt(this)">Ground</button>
+          </div>
+        </div>
+        <div class="price-row">
+          <div class="detail-price">$17.50</div>
+          <div class="detail-price-unit">/ 6 oz</div>
+        </div>
+        <div class="add-row">
+          <div class="qty-control">
+            <button class="qty-btn-dark" onclick="changeQty(-1)">−</button>
+            <div class="qty-num-dark" id="qty">1</div>
+            <button class="qty-btn-dark" onclick="changeQty(1)">+</button>
+          </div>
+          <button class="add-btn-dark">Add to cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-right">
+      <div class="producer-hero-section">
+        <div class="producer-portrait">BS</div>
+        <div class="producer-intro-label">The Producer</div>
+        <div class="producer-intro-name">Blanca Suazo</div>
+        <div class="producer-intro-role">Founder, Musa Café · Córdoba, Veracruz, México</div>
+        <div class="producer-story">
+          Blanca's family has farmed in Veracruz since <strong>1960</strong>. Through Musa Café, she has transformed that inheritance — building a nursery that supplies healthy seedlings to neighboring farms, refining processing techniques, and forging her own direct path to international markets.
+        </div>
+        <div class="producer-highlights">
+          <div class="highlight">
+            <div class="highlight-icon">🌱</div>
+            <div class="highlight-text"><strong>Nursery program</strong> — Blanca grows and supplies seedlings to fellow producers, building regional quality from the ground up.</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">✈</div>
+            <div class="highlight-text"><strong>Kigali, Rwanda</strong> — Selected to represent México at an international producer skill-sharing conference, connecting Latin American and African farmers.</div>
+          </div>
+          <div class="highlight">
+            <div class="highlight-icon">◎</div>
+            <div class="highlight-text"><strong>"Feminism is lived and practical"</strong> — Blanca defines her work not as political performance but as smallholder independence, in action.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transparency strip -->
+  <section class="detail-transparency">
+    <div class="trans-col">
+      <div class="trans-label">Sourcing</div>
+      <div class="trans-title">Direct relationship</div>
+      <div class="trans-body">This lot was sourced directly from Blanca's Musa Café operation, bypassing intermediaries to return a greater share of the sale price to the producer.</div>
+    </div>
+    <div class="trans-col">
+      <div class="trans-label">Price paid</div>
+      <div class="trans-num">$X.XX<span class="trans-num-unit">/lb</span></div>
+      <div class="trans-body">Floor price paid to Blanca above commodity rate. We are committing to publishing this figure for every Café Feminista lot going forward.</div>
+    </div>
+    <div class="trans-col">
+      <div class="trans-label">Impact</div>
+      <div class="trans-title">Verified by Joe Humanity</div>
+      <div class="trans-body">This lot is tracked through our Gender & Equity Committee sourcing review. Blanca's story and terms were verified in direct conversation — not written about her, but with her.</div>
+    </div>
+  </section>
+
+  <!-- Story + Timeline -->
+  <section class="detail-story">
+    <div>
+      <h2 class="detail-story-title">What's in the cup reflects who grew it</h2>
+      <p class="detail-story-body">Bright and expressive, this washed lot carries notes of cream soda, almond, and Meyer lemon on a smooth, creamy body. It is balanced and lively — a coffee that shines as a pour-over or in milk.</p>
+      <p class="detail-story-body">That expressiveness is not accidental. It reflects Blanca's precision in processing: careful fermentation windows, meticulous drying, and the quality standards she applies to every plant she grows.</p>
+      <p class="detail-story-body">Every sip supports a woman building tangible economic power — not through charity, but through the market value her skill commands.</p>
+    </div>
+    <div>
+      <div class="section-eyebrow" style="color: var(--rose); margin-bottom: 1.25rem;">Blanca's journey</div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot">60s</div>
+          <div>
+            <div class="timeline-year">Since 1960</div>
+            <div class="timeline-text"><strong>Family farming tradition</strong> established in Córdoba, Veracruz. Blanca inherits the land and its legacy.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">↑</div>
+          <div>
+            <div class="timeline-year">Ongoing</div>
+            <div class="timeline-text"><strong>Musa Café founded.</strong> Blanca formalizes her operation, building a nursery and gaining direct access to export channels.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">✈</div>
+          <div>
+            <div class="timeline-year">International</div>
+            <div class="timeline-text"><strong>Kigali conference.</strong> Selected to represent México, exchanging knowledge with producers from Latin America and Africa.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot">CF</div>
+          <div>
+            <div class="timeline-year">Now</div>
+            <div class="timeline-text"><strong>Café Feminista partnership.</strong> Blanca's lot joins Joe Coffee's program — on her terms, in her words.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-brand">Joe Coffee · Café Feminista</div>
+    <div class="footer-note">New York City Roasters · Established 2003</div>
+  </footer>
+</div>
+
+<script>
+  function show(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+    document.getElementById('nav-' + page).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  let qty = 1;
+  function changeQty(d) {
+    qty = Math.max(1, qty + d);
+    document.getElementById('qty').textContent = qty;
+  }
+
+  function selectOpt(btn) {
+    btn.closest('.option-pills').querySelectorAll('.opt').forEach(b => b.classList.remove('sel'));
+    btn.classList.add('sel');
+  }
+</script>
+</body>
+</html>
